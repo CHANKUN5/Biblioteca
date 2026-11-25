@@ -12,5 +12,6 @@ RUN apk add --no-cache fontconfig ttf-dejavu
 WORKDIR /app
 COPY --from=build /src/target/AppBibliotecaWeb-0.0.1-SNAPSHOT.jar app.jar
 ENV PORT=80
+ENV JAVA_TOOL_OPTIONS="-XX:TieredStopAtLevel=1 -Xms256m -XX:+UseSerialGC -Djava.security.egd=file:/dev/urandom"
 EXPOSE 80
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
