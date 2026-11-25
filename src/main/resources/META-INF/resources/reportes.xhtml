@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="plantilla.xhtml">
+    <ui:define name="titulo">Reportes</ui:define>
+    <ui:define name="contenido">
+        <h2>Reportes</h2>
+        <p class="ayuda">Las dos tablas salen de JPQL. El PDF usa esas mismas filas.</p>
+        <div class="acciones">
+            <a class="boton" href="#{request.contextPath}/reportes/mas-prestados.pdf">PDF de más prestados</a>
+            <a class="boton" href="#{request.contextPath}/reportes/mora.pdf">PDF de mora</a>
+        </div>
+        <div class="dos">
+            <section class="panel">
+                <h2>Más prestados del mes</h2>
+                <h:dataTable value="#{reporteBean.masPrestados}" var="fila">
+                    <h:column><f:facet name="header">Título</f:facet>#{fila[0]}</h:column>
+                    <h:column><f:facet name="header">Veces</f:facet>#{fila[1]}</h:column>
+                </h:dataTable>
+                <h:panelGroup layout="block" styleClass="vacio" rendered="#{empty reporteBean.masPrestados}">Todavía no hay préstamos en el último mes.</h:panelGroup>
+            </section>
+            <section class="panel">
+                <h2>Usuarios con mora</h2>
+                <h:dataTable value="#{reporteBean.mora}" var="fila">
+                    <h:column><f:facet name="header">Código</f:facet>#{fila[0]}</h:column>
+                    <h:column><f:facet name="header">Nombre</f:facet>#{fila[1]}</h:column>
+                    <h:column><f:facet name="header">Libro</f:facet>#{fila[2]}</h:column>
+                    <h:column><f:facet name="header">Debía volver</f:facet>#{fila[3]}</h:column>
+                </h:dataTable>
+                <h:panelGroup layout="block" styleClass="vacio" rendered="#{empty reporteBean.mora}">No hay usuarios con mora.</h:panelGroup>
+            </section>
+        </div>
+    </ui:define>
+</ui:composition>

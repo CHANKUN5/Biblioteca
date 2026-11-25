@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="plantilla.xhtml">
+    <ui:define name="titulo">Libros</ui:define>
+    <ui:define name="contenido">
+        <div class="dos">
+            <h:panelGroup layout="block" styleClass="panel" rendered="#{libroBean.bibliotecario}">
+                <h2>Registrar libro</h2>
+                <p class="ayuda">El validador revisa el ISBN antes de guardar.</p>
+                <h:form prependId="false" styleClass="formulario">
+                    <h:panelGroup layout="block" styleClass="aviso #{libroBean.ok ? 'ok' : ''}" rendered="#{not empty libroBean.mensaje}">
+                        <h:outputText value="#{libroBean.mensaje}"/>
+                    </h:panelGroup>
+                    <label>ISBN
+                        <h:inputText id="isbn" value="#{libroBean.isbn}" required="true" requiredMessage="El ISBN es obligatorio.">
+                            <f:validator validatorId="isbnValidator"/>
+                        </h:inputText>
+                    </label>
+                    <h:message for="isbn" styleClass="aviso"/>
+                    <label>Título
+                        <h:inputText id="titulo" value="#{libroBean.titulo}" required="true" requiredMessage="El título es obligatorio."/>
+                    </label>
+                    <h:message for="titulo" styleClass="aviso"/>
+                    <label>Autor
+                        <h:inputText id="autor" value="#{libroBean.autor}" required="true" requiredMessage="El autor es obligatorio."/>
+                    </label>
+                    <h:message for="autor" styleClass="aviso"/>
+                    <label>Ejemplares
+                        <h:inputText id="ejemplares" value="#{libroBean.ejemplares}" required="true" requiredMessage="Indica los ejemplares.">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:inputText>
+                    </label>
+                    <h:message for="ejemplares" styleClass="aviso"/>
+                    <h:commandButton value="Registrar" action="#{libroBean.registrar}"/>
+                </h:form>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="panel" rendered="#{not libroBean.bibliotecario}">
+                <h2>Consulta</h2>
+                <p class="ayuda">El estudiante ve el catálogo. El registro lo hace el bibliotecario.</p>
+            </h:panelGroup>
+            <section class="panel">
+                <h2>Catálogo</h2>
+                <div class="tabla-wrap">
+                    <h:dataTable value="#{libroBean.libros}" var="libro">
+                        <h:column><f:facet name="header">ISBN</f:facet>#{libro.isbn}</h:column>
+                        <h:column><f:facet name="header">Título</f:facet>#{libro.titulo}</h:column>
+                        <h:column><f:facet name="header">Autor</f:facet>#{libro.autor}</h:column>
+                        <h:column><f:facet name="header">Ejemplares</f:facet>#{libro.ejemplares}</h:column>
+                    </h:dataTable>
+                    <h:panelGroup layout="block" styleClass="vacio" rendered="#{empty libroBean.libros}">Aún no hay libros.</h:panelGroup>
+                </div>
+            </section>
+        </div>
+    </ui:define>
+</ui:composition>

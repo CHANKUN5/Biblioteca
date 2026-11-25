@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="plantilla.xhtml">
+    <ui:define name="titulo">Préstamos</ui:define>
+    <ui:define name="contenido">
+        <div class="dos">
+            <h:panelGroup layout="block" styleClass="panel" rendered="#{prestamoBean.bibliotecario}">
+                <h2>Nuevo préstamo</h2>
+                <p class="ayuda">El bean queda en sesión. El validador corta si el usuario ya tiene 3 libros sin devolver.</p>
+                <h:form prependId="false" styleClass="formulario">
+                    <f:event type="preValidate" listener="#{prestamoBean.limpiarMensaje}"/>
+                    <h:panelGroup layout="block" styleClass="aviso #{prestamoBean.ok ? 'ok' : ''}" rendered="#{not empty prestamoBean.mensaje}">
+                        <h:outputText value="#{prestamoBean.mensaje}"/>
+                    </h:panelGroup>
+                    <label>Usuario
+                        <h:selectOneMenu id="usuario" value="#{prestamoBean.usuarioId}" required="true" requiredMessage="Elige un usuario.">
+                            <f:selectItem itemLabel="Elige un usuario" noSelectionOption="true"/>
+                            <f:selectItems value="#{prestamoBean.usuarios}" var="usuario" itemValue="#{usuario.usuario_id}" itemLabel="#{usuario.nombre}"/>
+                            <f:validator validatorId="limitePrestamo"/>
+                        </h:selectOneMenu>
+                    </label>
+                    <h:message for="usuario" styleClass="aviso"/>
+                    <label>Libro
+                        <h:selectOneMenu id="libro" value="#{prestamoBean.libroId}" required="true" requiredMessage="Elige un libro.">
+                            <f:selectItem itemLabel="Elige un libro" noSelectionOption="true"/>
+                            <f:selectItems value="#{prestamoBean.libros}" var="libro" itemValue="#{libro.libro_id}" itemLabel="#{libro.titulo}"/>
+                        </h:selectOneMenu>
+                    </label>
+                    <h:message for="libro" styleClass="aviso"/>
+                    <label>Fecha de préstamo
+                        <h:inputText id="fechaPrestamo" value="#{prestamoBean.fechaPrestamo}" required="true" requiredMessage="Indica la fecha de préstamo.">
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                        </h:inputText>
+                    </label>
+                    <h:message for="fechaPrestamo" styleClass="aviso"/>
+                    <label>Fecha de devolución
+                        <h:inputText id="fechaDevolucion" value="#{prestamoBean.fechaDevolucion}" required="true" requiredMessage="Indica la fecha de devolución.">
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                        </h:inputText>
+                    </label>
+                    <h:message for="fechaDevolucion" styleClass="aviso"/>
+                    <h:commandButton value="Prestar" action="#{prestamoBean.registrar}"/>
+                </h:form>
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="panel" rendered="#{not prestamoBean.bibliotecario}">
+                <h2>Tu ficha</h2>
+                <p class="ayuda">Solo ves los préstamos de tu código. Registrar y devolver queda en el bibliotecario.</p>
+            </h:panelGroup>
+            <section class="panel">
+                <h2>Préstamos</h2>
+                <h:form prependId="false">
+                    <div class="tabla-wrap">
+                        <h:dataTable value="#{prestamoBean.prestamos}" var="item">
+                            <h:column>
+                                <f:facet name="header">Usuario</f:facet>
+                                <h:outputText value="#{item.usuario.nombre}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Libro</f:facet>
+                                <h:outputText value="#{item.libro.titulo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Prestado</f:facet>
+                                <h:outputText value="#{item.fechaPrestamo}"><f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Devolver el</f:facet>
+                                <h:outputText value="#{item.fechaDevolucion}"><f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Estado</f:facet>
+                                <h:commandButton value="Devolver" action="#{prestamoBean.devolver(item.prestamo_id)}" rendered="#{prestamoBean.bibliotecario and item.fechaEntrega == null}"/>
+                                <h:outputText value="Prestado" rendered="#{not prestamoBean.bibliotecario and item.fechaEntrega == null}"/>
+                                <h:outputText value="Devuelto" rendered="#{item.fechaEntrega != null}"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:panelGroup layout="block" styleClass="vacio" rendered="#{empty prestamoBean.prestamos}">Aún no hay préstamos.</h:panelGroup>
+                    </div>
+                </h:form>
+            </section>
+        </div>
+    </ui:define>
+</ui:composition>

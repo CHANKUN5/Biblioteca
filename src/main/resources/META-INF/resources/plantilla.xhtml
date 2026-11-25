@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title><ui:insert name="titulo">Biblioteca</ui:insert></title>
+    <link rel="stylesheet" href="#{request.contextPath}/estilos.css"/>
+</h:head>
+<h:body>
+    <div class="marco">
+        <header class="cabecera">
+            <div>
+                <p class="marca">Senati</p>
+                <h1>Biblioteca universitaria</h1>
+            </div>
+            <div class="sesion">
+                <span>#{sessionScope.uidLdap}</span>
+                <span class="rol">#{sessionScope.rol eq 'BIBLIOTECARIO' ? 'Bibliotecario' : 'Estudiante'}</span>
+                <a class="salir" href="#{request.contextPath}/salir">Cerrar sesión</a>
+            </div>
+        </header>
+        <div class="layout">
+            <nav class="menu">
+                <h:link outcome="inicio" value="Inicio" styleClass="#{view.viewId eq '/inicio.xhtml' ? 'activo' : ''}"/>
+                <h:link outcome="libros" value="Libros" styleClass="#{view.viewId eq '/libros.xhtml' ? 'activo' : ''}"/>
+                <h:link outcome="usuarios" value="Usuarios" styleClass="#{view.viewId eq '/usuarios.xhtml' ? 'activo' : ''}" rendered="#{sessionScope.rol eq 'BIBLIOTECARIO'}"/>
+                <h:link outcome="prestamo" value="Préstamos" styleClass="#{view.viewId eq '/prestamo.xhtml' ? 'activo' : ''}"/>
+                <h:link outcome="reportes" value="Reportes" styleClass="#{view.viewId eq '/reportes.xhtml' ? 'activo' : ''}" rendered="#{sessionScope.rol eq 'BIBLIOTECARIO'}"/>
+            </nav>
+            <main class="contenido">
+                <ui:insert name="contenido"/>
+            </main>
+        </div>
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="#{request.contextPath}/estilos.css"/>
+</h:head>
+<h:body styleClass="login">
+    <section class="login-marca">
+        <p class="marca">Senati</p>
+        <h1>Biblioteca universitaria</h1>
+        <p>El ingreso se valida contra el LDAP de la universidad. Después cada función abre su propia pantalla.</p>
+    </section>
+    <main class="login-panel">
+        <h2>Iniciar sesión</h2>
+        <p class="texto">Entra con el usuario del directorio para prestar, devolver y ver reportes.</p>
+        <h:form prependId="false">
+            <h:panelGroup layout="block" styleClass="aviso" rendered="#{not empty loginBean.mensaje}">
+                <h:outputText value="#{loginBean.mensaje}"/>
+            </h:panelGroup>
+            <label>Usuario
+                <h:inputText id="uid" value="#{loginBean.uid}" required="true" requiredMessage="Escribe el usuario." pt:autocomplete="username"/>
+            </label>
+            <h:message for="uid" styleClass="aviso"/>
+            <label>Clave
+                <h:inputSecret id="clave" value="#{loginBean.clave}" required="true" requiredMessage="Escribe la clave." pt:autocomplete="current-password"/>
+            </label>
+            <h:message for="clave" styleClass="aviso"/>
+            <h:commandButton value="Ingresar" action="#{loginBean.ingresar}"/>
+        </h:form>
+        <p class="pista">Bibliotecario: biblioteca · 123456. Ve libros, usuarios, préstamos y reportes. Estudiante: 20210001 · 123456. Solo ve el catálogo y sus préstamos. El 20210002 está inactivo.</p>
+    </main>
+</h:body>
+</html>

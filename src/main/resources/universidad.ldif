@@ -1,0 +1,69 @@
+dn: dc=universidad,dc=edu
+objectClass: top
+objectClass: domain
+dc: universidad
+
+dn: ou=personas,dc=universidad,dc=edu
+objectClass: top
+objectClass: organizationalUnit
+ou: personas
+
+dn: uid=biblioteca,ou=personas,dc=universidad,dc=edu
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: biblioteca
+cn: Bibliotecario SENATI
+sn: SENATI
+userPassword: 123456
+
+dn: uid=20210001,ou=personas,dc=universidad,dc=edu
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: 20210001
+cn: Kassandra Castro Huauya
+sn: Castro
+userPassword: 123456
+
+dn: uid=20210002,ou=personas,dc=universidad,dc=edu
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: 20210002
+cn: Diego Saravia Duran
+sn: Saravia
+userPassword: 123456
+
+dn: uid=20210003,ou=personas,dc=universidad,dc=edu
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: 20210003
+cn: Ana Quispe Flores
+sn: Quispe
+userPassword: 123456
+
+dn: uid=20210004,ou=personas,dc=universidad,dc=edu
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: 20210004
+cn: Luis Mendoza Rios
+sn: Mendoza
+userPassword: 123456
+
+dn: uid=20210005,ou=personas,dc=universidad,dc=edu
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: 20210005
+cn: Maria Delgado Paz
+sn: Delgado
+userPassword: 123456
