@@ -11,4 +11,6 @@ import pe.senati.entity.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>
 {
     Optional<Usuario> findByCodigo(String codigo);
+
+    Optional<Usuario> findByCorreo(String correo);
 }

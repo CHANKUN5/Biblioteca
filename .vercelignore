@@ -1,0 +1,10 @@
+target
+/config/
+.factorypath
+.settings
+.classpath
+.project
+.idea
+*.iml
+.env*
+.vercel

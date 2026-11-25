@@ -1,5 +1,5 @@
 target/
-config/
+/config/
 .idea
 .factorypath
 *.iml
@@ -7,3 +7,6 @@ config/
 .project
 .settings
 .vscode/
+
+.vercel
+.env*

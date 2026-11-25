@@ -18,22 +18,22 @@ cn: Bibliotecario SENATI
 sn: SENATI
 userPassword: 123456
 
-dn: uid=20210001,ou=personas,dc=universidad,dc=edu
+dn: uid=Estudiante1,ou=personas,dc=universidad,dc=edu
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
 objectClass: inetOrgPerson
-uid: 20210001
+uid: Estudiante1
 cn: Kassandra Castro Huauya
 sn: Castro
 userPassword: 123456
 
-dn: uid=20210002,ou=personas,dc=universidad,dc=edu
+dn: uid=Estudiante2,ou=personas,dc=universidad,dc=edu
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
 objectClass: inetOrgPerson
-uid: 20210002
+uid: Estudiante2
 cn: Diego Saravia Duran
 sn: Saravia
 userPassword: 123456

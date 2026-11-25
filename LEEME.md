@@ -1,6 +1,8 @@
 # AppBibliotecaWeb
 
-Sistema del caso de Gestores de Administración Web. Cada función tiene su pantalla. Las capas son entidad, repositorio, servicio, bean y xhtml.
+Sistema del caso de Gestores de Administración Web. Cada función tiene su pantalla. Las capas son entidad, repositorio, servicio, bean y xhtml. Sigue en Spring Boot.
+
+En línea: https://biblioteca-rouge-eight.vercel.app/senati/login.xhtml
 
 ## Cómo correrlo
 
@@ -11,8 +13,8 @@ Sistema del caso de Gestores de Administración Web. Cada función tiene su pant
 Usuarios del LDAP:
 
 - `biblioteca` / `123456` entra como bibliotecario. Ve libros, usuarios, préstamos y reportes.
-- `20210001` / `123456` entra como estudiante. Ve el catálogo y solo sus préstamos.
-- `20210002` / `123456` existe en el LDAP, pero está inactivo y la pantalla lo rechaza.
+- `Estudiante1` / `123456` entra como estudiante. Ve el catálogo y solo sus préstamos.
+- `Estudiante2` / `123456` existe en el LDAP, pero está inactivo y la pantalla lo rechaza.
 
 El rol queda en la sesión. `UsuarioBean` guarda el rol en la tabla. `LibroBean` y `PrestamoBean` cortan el registro si el rol no es bibliotecario.
 
